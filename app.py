@@ -64,7 +64,6 @@ MODEL_HIERARCHY = [
     "gemini-2.5-flash-lite",
     "gemini-2.0-flash",
     "gemini-2.0-flash-lite"
-    "gemini-1.5-flash"
 ]
 
 MAX_RETRIES_PER_KEY = 2
@@ -689,8 +688,11 @@ async def analyze_data(request: Request):
                     except Exception:
                         mapped[key] = result[q]
             result = mapped
-
+        # nresult = []
+        # for i in result:
+            # nresult.append(result[i])
         return JSONResponse(content=result)
+        # return nresult
 
     except HTTPException as he:
         raise he
@@ -1116,5 +1118,4 @@ async def diagnose(full: bool = Query(False, description="If true, run extended 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=int(os.getenv("PORT", 8000)))
-
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
